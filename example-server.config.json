@@ -1,0 +1,6 @@
+{
+  "port": "8008",
+  "user": "couchdb_admin",
+  "pass": "couchdb_password",
+  "target": "https://couchdb.example.com:5984"
+}

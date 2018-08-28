@@ -1,0 +1,10 @@
+{
+  "port": "8008",
+  "token_host": "https://example.com/oauth/token",
+  "username": "server_user",
+  "password": "server_pass",
+  "client_id": "client_id-rand",
+  "client_secret": "client_secret-rand",
+  "grant_type": "password",
+  "remote": "https://sso.exmpale.com:5984"
+}

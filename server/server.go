@@ -67,7 +67,7 @@ func (s *Server) ProxyRootPath(w http.ResponseWriter, r *http.Request) {
 		Msg  string `json:"msg"`
 		Name string `json:"name"`
 	}
-	unAuth := message{"Welcome", "The Apache Software Foundation."}
+	unAuth := message{"Welcome", "The Couch-SSO service."}
 	s.ResponseJson(unAuth, w, r)
 }
 

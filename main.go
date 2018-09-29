@@ -10,7 +10,6 @@ import (
 )
 
 var App struct {
-	Port string `json:"port"`
 	server.Server
 	client.Client
 }
@@ -28,10 +27,8 @@ func main() {
 	app := &App
 	fmt.Println(app)
 	if app.Server.Target != "" {
-		app.Server.Port = app.Port
 		app.Server.Run()
 	} else if app.Client.Remote != "" {
-		app.Client.Port = app.Port
 		app.Client.Run()
 	}
 }

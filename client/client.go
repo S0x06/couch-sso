@@ -1,8 +1,8 @@
 package client
 
 import (
-	"bytes"
 	"../model"
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -14,7 +14,7 @@ import (
 )
 
 type Client struct {
-	Port         string `json:"port"`
+	ProxyPort    string `json:"proxy_port"`
 	Username     string `json:"username"`
 	Password     string `json:"password"`
 	TokenHost    string `json:"token_host"`
@@ -32,7 +32,7 @@ func (c *Client) Run() {
 	remote, _ = url.Parse(c.Remote)
 	go c.TimerRefreshToken()
 	http.HandleFunc("/", c.Proxy)
-	addr := "0.0.0.0" + ":" + c.Port
+	addr := "0.0.0.0" + ":" + c.ProxyPort
 	fmt.Printf("Listing on " + addr + "\n")
 	log.Fatal(http.ListenAndServe(addr, nil))
 }

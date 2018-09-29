@@ -63,7 +63,7 @@ Supports grant_type `password` and `client_credentials`.
     
     ```
     {
-      "port": "8008",
+      "proxy_port": "8008",
       "token_host": "https://example.com/oauth/token",
       "username": "server_user",
       "password": "server_pass",

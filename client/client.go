@@ -29,6 +29,7 @@ var remote = &url.URL{}
 
 func (c *Client) Run() {
 	c.RetrieveToken()
+	remote, _ = url.Parse(c.Remote)
 	go c.TimerRefreshToken()
 	http.HandleFunc("/", c.Proxy)
 	addr := "0.0.0.0" + ":" + c.Port

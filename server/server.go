@@ -21,6 +21,7 @@ type Server struct {
 var target = &url.URL{}
 
 func (s *Server) Run() {
+	target, _ = url.Parse(s.Target)
 	http.HandleFunc("/", s.Proxy)
 	addr := "0.0.0.0"
 	fmt.Printf("Listing on " + addr + ":" + s.Port + "\n")

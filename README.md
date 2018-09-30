@@ -25,7 +25,7 @@
 +-----------------------------------------------------+                         +------------------------------------------------------+
 
 ```
-An application implementation of [JSON Web Token](https://tools.ietf.org/html/rfc7519).   
+An application implementation of [JSON Web Token](https://tools.ietf.org/html/rfc7519). The inspiration comes from accessing [CouchDB](http://couchdb.apache.org/) in JWT.  
 [Couch-SSO](http://github.com/dravenk/couch-sso) can be deployed on both the server side and the client side.You can also write your own client and use couch-sso on the server side alone.   
 The client change the Authorization in the request Header to JWT and forwards it to the Authorization Server.  
 After the Authorization Server listens to the request, check whether the request information in the Header contains JWT.   
@@ -84,3 +84,38 @@ Supports grant_type `password` and `client_credentials`.
     Create a New Replication.Open browser in  `http://192.168.1.120:5984/_utils/#/replication`  
     Since the custom CouchDB database name is db_name, the address is entered as localhost IP.  
     `http://server_use:server_pass@192.168.1.120:8008/db_name`  
+
+#### Deploy with docker-compose
+
+docker-compose.yml
+```
+version: '3.3'
+services:
+  couchdb:
+    image: couchdb
+    volumes:
+      - ${STORAGE}/couchdb/data:/opt/couchdb/data
+    ports:
+      - 5984:5984
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=password
+    container_name: couchdb
+    networks:
+      - backend
+  couch-sso:
+    image: golang
+    container_name: couch-sso
+    volumes:
+      - ${GO_PATH}/src/couch-sso:/go/src/couch-sso
+    working_dir: /go/src/couch-sso
+    command: go run main.go
+    ports:
+      - 8008:8008
+    networks:
+      - backend
+```
+1. New Replication 
+     Use the container name as the access address. 
+     Eg. Ths container name is `couch-sso`    
+    `http://server_use:server_pass@couch-sso:8008/db_name`  
